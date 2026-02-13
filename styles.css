@@ -538,6 +538,10 @@ body.no-custom-cursor .btn-heart,
   padding-right: 2rem;
 }
 
+.modal-box:has(.letter-burmese) .modal-title {
+  font-family: 'Noto Sans Myanmar', var(--font-heading), sans-serif;
+}
+
 .modal-body {
   font-size: 1rem;
   line-height: 1.7;
@@ -553,6 +557,17 @@ body.no-custom-cursor .btn-heart,
   font-family: var(--font-heading);
   font-style: italic;
   color: var(--gold-dark);
+}
+
+.letter-burmese {
+  font-family: 'Noto Sans Myanmar', Lato, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.letter-burmese .signature {
+  font-family: inherit;
+  font-style: normal;
 }
 
 /* ===== Footer & birthday countdown ===== */
@@ -658,6 +673,18 @@ body.no-custom-cursor .music-toggle,
 .music-label {
   position: absolute;
   left: -9999px;
+}
+
+.youtube-player-wrap {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
 }
 
 /* ===== Scroll-triggered animations ===== */
