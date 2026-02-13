@@ -379,6 +379,53 @@ body.no-custom-cursor .gallery-item,
   object-fit: contain;
 }
 
+/* ===== Image box (Our Moments) ===== */
+.image-box-section {
+  padding: 3rem 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.image-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.image-box-item {
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--blush);
+  cursor: pointer;
+  box-shadow: 0 8px 24px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: 2px solid var(--gold-light);
+}
+
+.image-box-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px var(--shadow-gold);
+}
+
+.image-box-item img {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .image-box {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
 /* ===== Why I Love You ===== */
 .why-section {
   padding: 4rem 0;

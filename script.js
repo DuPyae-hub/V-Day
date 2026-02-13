@@ -2,7 +2,7 @@
   'use strict';
 
   // ----- Config -----
-  const LOVE_DATE = new Date('2025-12-30T00:00:00');
+  const LOVE_DATE = new Date('2025-12-30T23:25:00');
   const BIRTHDAY_DATE = new Date('2026-02-17T00:00:00');
 
   // ----- Custom heart cursor -----
@@ -121,14 +121,21 @@
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = lightbox && lightbox.querySelector('.lightbox-close');
 
+  function openLightbox(src) {
+    if (!lightbox || !lightboxImg || !src) return;
+    lightboxImg.src = src;
+    lightbox.removeAttribute('hidden');
+    lightbox.setAttribute('data-open', 'true');
+    document.body.style.overflow = 'hidden';
+  }
   document.querySelectorAll('.gallery-item').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      const src = btn.getAttribute('data-src');
-      if (!lightbox || !lightboxImg || !src) return;
-      lightboxImg.src = src;
-      lightbox.removeAttribute('hidden');
-      lightbox.setAttribute('data-open', 'true');
-      document.body.style.overflow = 'hidden';
+      openLightbox(btn.getAttribute('data-src'));
+    });
+  });
+  document.querySelectorAll('.image-box-item').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      openLightbox(btn.getAttribute('data-src'));
     });
   });
 
@@ -407,7 +414,7 @@
   }
 
   // ----- Scroll reveal -----
-  const revealEls = document.querySelectorAll('.section-title, .day-counter, .gallery, .split-layout, .btn-heart, .birthday-countdown');
+  const revealEls = document.querySelectorAll('.section-title, .day-counter, .gallery, .split-layout, .btn-heart, .image-box, .birthday-countdown');
   const observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
