@@ -295,14 +295,102 @@
     var y = e.clientY || (e.touches && e.touches[0].clientY) || 0;
     spawnTapHearts(x, y);
   }
+  var heroTapCount = 0;
+  var heroTapTimer = null;
   if (heroHeart) {
-    heroHeart.addEventListener('click', onHeroTap);
+    heroHeart.addEventListener('click', function (e) {
+      var x = e.clientX || 0;
+      var y = e.clientY || 0;
+      onHeroTap(e);
+      heroTapCount++;
+      if (heroTapTimer) clearTimeout(heroTapTimer);
+      heroTapTimer = setTimeout(function () { heroTapCount = 0; }, 2000);
+      if (heroTapCount >= 5) {
+        heroTapCount = 0;
+        var st = document.getElementById('secret-toast');
+        if (st) {
+          st.textContent = "You found my heart. It's always been yours. ♥";
+          st.removeAttribute('hidden');
+          st.classList.add('visible');
+          setTimeout(function () {
+            st.classList.remove('visible');
+            st.setAttribute('hidden', '');
+          }, 3500);
+        }
+      }
+    });
     heroHeart.addEventListener('touchend', function (e) {
       if (e.changedTouches && e.changedTouches[0]) {
         spawnTapHearts(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
       }
     });
   }
+
+  // ----- Say yes (Valentine forever) -----
+  var sayYesPrompt = document.getElementById('say-yes-prompt');
+  var sayYesResponse = document.getElementById('say-yes-response');
+  if (sayYesPrompt && sayYesResponse) {
+    sayYesPrompt.addEventListener('click', function () {
+      sayYesPrompt.style.display = 'none';
+      sayYesResponse.removeAttribute('hidden');
+      if (tapHeartsEl) {
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        for (var i = 0; i < 12; i++) {
+          setTimeout(function () {
+            spawnTapHearts(cx + (Math.random() - 0.5) * 100, cy + (Math.random() - 0.5) * 100);
+          }, i * 80);
+        }
+      }
+    });
+  }
+
+  // ----- For ပူတူး only (secret unlock) -----
+  var forYouBox = document.getElementById('for-you-box');
+  var forYouSecret = document.getElementById('for-you-secret');
+  if (forYouBox && forYouSecret) {
+    forYouBox.addEventListener('click', function () {
+      forYouBox.style.display = 'none';
+      forYouSecret.removeAttribute('hidden');
+    });
+  }
+
+  // ----- Footer message when she scrolls to bottom -----
+  var footerMessage = document.getElementById('footer-message');
+  var footerEl = document.querySelector('.footer');
+  if (footerMessage && footerEl) {
+    var footerObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) footerMessage.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    footerObs.observe(footerEl);
+  }
+
+  // ----- "Still here?" toast after 45 seconds -----
+  setTimeout(function () {
+    var toast = document.getElementById('toast-msg');
+    if (!toast) return;
+    toast.textContent = "You're still here. That means everything. ♥";
+    toast.removeAttribute('hidden');
+    toast.classList.add('visible');
+    setTimeout(function () {
+      toast.classList.remove('visible');
+      setTimeout(function () {
+        toast.setAttribute('hidden', '');
+      }, 400);
+    }, 4500);
+  }, 45000);
+
+  // ----- Double-tap anywhere: spawn hearts -----
+  var lastTap = 0;
+  document.addEventListener('click', function (e) {
+    var now = Date.now();
+    if (now - lastTap < 400 && now - lastTap > 50) {
+      spawnTapHearts(e.clientX, e.clientY);
+    }
+    lastTap = now;
+  });
 
   // ----- Corner "Made with love" -----
   setTimeout(function () {
@@ -438,7 +526,7 @@
   }
 
   // ----- Scroll reveal -----
-  const revealEls = document.querySelectorAll('.section-title, .day-counter, .gallery, .split-layout, .btn-heart, .image-box, .birthday-countdown');
+  const revealEls = document.querySelectorAll('.section-title, .day-counter, .gallery, .split-layout, .btn-heart, .image-box, .for-you-section, .birthday-countdown');
   const observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {

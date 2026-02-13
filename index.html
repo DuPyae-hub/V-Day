@@ -113,6 +113,22 @@
   <section class="letter-section">
     <div class="container">
       <button type="button" class="btn-heart" id="open-letter">Click to Open My Heart</button>
+      <p class="say-yes-prompt" id="say-yes-prompt">Tap here if you'll be my Valentine forever ♥</p>
+      <div class="say-yes-response" id="say-yes-response" hidden aria-live="polite">
+        <span class="say-yes-text">You said yes! I'm the luckiest. ♥</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="for-you-section">
+    <div class="container">
+      <button type="button" class="for-you-box" id="for-you-box" aria-label="For you only">
+        <span class="for-you-label">For ပူတူး only</span>
+        <span class="for-you-hint">Tap to unlock ♥</span>
+      </button>
+      <div class="for-you-secret" id="for-you-secret" hidden>
+        <p>I fall for you more every day. You're my always. ♥</p>
+      </div>
     </div>
   </section>
 
@@ -161,6 +177,7 @@
 
   <footer class="footer">
     <div class="container">
+      <p class="footer-message" id="footer-message">Thank you for being in my story. I love you, ပူတူး ♥</p>
       <h3 class="countdown-title">Counting down to our next celebration together!</h3>
       <div class="birthday-countdown">
         <span class="countdown-block"><span id="bday-days">0</span><small>Days</small></span>
@@ -171,6 +188,9 @@
       <p class="countdown-label">Until 17 February 2026</p>
     </div>
   </footer>
+
+  <div id="toast-msg" class="toast-msg" aria-live="polite" hidden></div>
+  <div id="secret-toast" class="secret-toast" aria-live="polite" hidden></div>
 
   <div class="music-wrap">
     <div class="music-celebration-wrap" id="music-celebration-wrap" aria-hidden="true"></div>
