@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Happy Valentine's Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="heart-cursor"></div>
+  <div id="particles-js"></div>
+
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Our Story</h1>
+      <p class="hero-subtitle">To the girl who changed my world... Happy Valentine's Day, my love!</p>
+      <p class="hero-date">30 December 2025</p>
+      <div class="heart-frame">
+        <svg class="heart-svg-mask" viewBox="0 0 24 24" preserveAspectRatio="none">
+          <defs>
+            <clipPath id="heart-clip">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </clipPath>
+          </defs>
+          <image href="assets/IMG_2962-94ae2a88-f876-4c06-9299-8ad1c49320b4.png" x="0" y="0" width="24" height="24" preserveAspectRatio="xMidYMid slice" clip-path="url(#heart-clip)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </header>
+
+  <section class="counter-section" id="counter">
+    <div class="container">
+      <h2 class="section-title">Our Love Story</h2>
+      <div class="day-counter">
+        <span id="days">0</span> Days,
+        <span id="hours">0</span> Hours,
+        <span id="minutes">0</span> Minutes
+      </div>
+      <p class="counter-since">since 30 December 2025</p>
+    </div>
+  </section>
+
+  <section class="gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Our Memories</h2>
+      <p class="section-subtitle">Click any photo to see it in full</p>
+      <div class="gallery grid-3">
+        <button type="button" class="gallery-item" data-src="assets/IMG_2962-94ae2a88-f876-4c06-9299-8ad1c49320b4.png" aria-label="Open photo">
+          <img src="assets/IMG_2962-94ae2a88-f876-4c06-9299-8ad1c49320b4.png" alt="Us together" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_2986-8a915235-5ed9-4475-b119-da7da51c3332.png" aria-label="Open photo">
+          <img src="assets/IMG_2986-8a915235-5ed9-4475-b119-da7da51c3332.png" alt="Our selfie" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_2985-c7c62249-a4c4-413b-8540-bef0c4fc1ac4.png" aria-label="Open photo">
+          <img src="assets/IMG_2985-c7c62249-a4c4-413b-8540-bef0c4fc1ac4.png" alt="A moment together" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_2954-134083a3-6aca-45f6-91e7-2d2ee571d871.png" aria-label="Open photo">
+          <img src="assets/IMG_2954-134083a3-6aca-45f6-91e7-2d2ee571d871.png" alt="You" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_3099-0f2f64cd-3882-4379-a36e-f35c50a17b63.png" aria-label="Open photo">
+          <img src="assets/IMG_3099-0f2f64cd-3882-4379-a36e-f35c50a17b63.png" alt="Memory" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_2965-c074a1f6-ce5c-4fec-8867-8ecaa99e45ad.png" aria-label="Open photo">
+          <img src="assets/IMG_2965-c074a1f6-ce5c-4fec-8867-8ecaa99e45ad.png" alt="Adventure" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_2958-f90c7765-ea46-428f-9522-c0c819febe2a.png" aria-label="Open photo">
+          <img src="assets/IMG_2958-f90c7765-ea46-428f-9522-c0c819febe2a.png" alt="Day out" />
+        </button>
+        <button type="button" class="gallery-item" data-src="assets/IMG_3142-0915d11d-c602-45ac-9354-3c60559a4c91.png" aria-label="Open photo">
+          <img src="assets/IMG_3142-0915d11d-c602-45ac-9354-3c60559a4c91.png" alt="Us" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button type="button" class="lightbox-close" aria-label="Close">×</button>
+    <div class="lightbox-content">
+      <img src="" alt="Enlarged memory" id="lightbox-img" />
+    </div>
+  </div>
+
+  <section class="why-section" id="why">
+    <div class="container split-layout">
+      <div class="why-photo-wrap">
+        <img src="assets/IMG_2954-134083a3-6aca-45f6-91e7-2d2ee571d871.png" alt="You" class="why-photo" />
+      </div>
+      <div class="why-content">
+        <h2 class="section-title">Why I Love You</h2>
+        <ul class="why-list">
+          <li>Your smile that melts my heart</li>
+          <li>Your kindness towards everyone</li>
+          <li>Our silly adventures</li>
+          <li>And just being <em>you</em>!</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="letter-section">
+    <div class="container">
+      <button type="button" class="btn-heart" id="open-letter">Click to Open My Heart</button>
+    </div>
+  </section>
+
+  <div id="letter-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="letter-title" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal-box">
+      <button type="button" class="modal-close" aria-label="Close">×</button>
+      <h2 id="letter-title" class="modal-title">A Letter for You</h2>
+      <div class="modal-body">
+        <p>My love,</p>
+        <p>From the moment you came into my life, everything changed. You didn’t just walk in—you brought light, laughter, and a kind of peace I didn’t know I was missing. Every day with you feels like a gift.</p>
+        <p>I love your smile—the way it reaches your eyes and makes the whole room feel warmer. I love your kindness, how you care for the people around you without asking for anything back. I love our silly adventures, the inside jokes, the boba runs, and the quiet moments when we don’t need to say a word.</p>
+        <p>But more than any single thing, I love <em>you</em>. The person you are. The way you think, the way you laugh, the way you make me want to be a better person. You’re my favorite place to be.</p>
+        <p>So this Valentine’s Day, I just want you to know: you are loved, you are cherished, and you are the best part of my story. Here’s to many more December 30ths, and every ordinary, extraordinary day in between.</p>
+        <p>Forever yours,</p>
+        <p class="signature">With all my heart</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <h3 class="countdown-title">Counting down to our next celebration together!</h3>
+      <div class="birthday-countdown">
+        <span class="countdown-block"><span id="bday-days">0</span><small>Days</small></span>
+        <span class="countdown-block"><span id="bday-hours">0</span><small>Hours</small></span>
+        <span class="countdown-block"><span id="bday-minutes">0</span><small>Minutes</small></span>
+        <span class="countdown-block"><span id="bday-seconds">0</span><small>Seconds</small></span>
+      </div>
+      <p class="countdown-label">Until 17 February 2026</p>
+    </div>
+  </footer>
+
+  <div class="music-toggle" id="music-toggle" aria-label="Toggle music">
+    <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+    </svg>
+    <span class="music-label">Music</span>
+  </div>
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
