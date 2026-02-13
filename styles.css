@@ -695,6 +695,18 @@ body.no-custom-cursor .music-toggle,
   left: -9999px;
 }
 
+.yt-music {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
 
 /* ===== Scroll-triggered animations ===== */
 .reveal {
