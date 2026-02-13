@@ -156,6 +156,29 @@
   const letterBackdrop = letterModal && letterModal.querySelector('.modal-backdrop');
   const letterClose = letterModal && letterModal.querySelector('.modal-close');
 
+  function playLetterChime() {
+    try {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return;
+      var ctx = new C();
+      var notes = [523.25, 659.25, 783.99];
+      var startTime = ctx.currentTime;
+      notes.forEach(function (freq, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.2, startTime + i * 0.08 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.01, startTime + i * 0.08 + 0.35);
+        osc.start(startTime + i * 0.12);
+        osc.stop(startTime + i * 0.12 + 0.4);
+      });
+    } catch (e) {}
+  }
+
   function heartBurst(container, count) {
     if (!container) return;
     var hearts = ['♥', '❤', '💕'];
@@ -176,18 +199,36 @@
 
   function openLetter() {
     if (!letterModal) return;
+    playLetterChime();
     var burst = document.getElementById('letter-burst');
     if (burst) {
       burst.innerHTML = '';
-      heartBurst(burst, 12);
+      heartBurst(burst, 18);
+      setTimeout(function () {
+        heartBurst(burst, 10);
+      }, 150);
+    }
+    var glow = document.getElementById('letter-glow');
+    if (glow) glow.style.animation = 'none';
+    var box = document.getElementById('letter-modal-box');
+    if (box) {
+      box.classList.remove('letter-open');
+      void box.offsetWidth;
+      box.classList.add('letter-open');
     }
     letterModal.removeAttribute('hidden');
     letterModal.setAttribute('data-open', 'true');
     document.body.style.overflow = 'hidden';
+    if (glow) {
+      glow.offsetHeight;
+      glow.style.animation = '';
+    }
   }
 
   function closeLetter() {
     if (!letterModal) return;
+    var box = document.getElementById('letter-modal-box');
+    if (box) box.classList.remove('letter-open');
     letterModal.setAttribute('data-open', 'false');
     letterModal.setAttribute('hidden', '');
     document.body.style.overflow = '';
