@@ -15,7 +15,7 @@ Then visit **http://localhost:8080**.
 
 ## Music
 
-The floating music button plays `music.mp3` in the project root. Add your own romantic instrumental file named **music.mp3** (MP3 format) to enable background music.
+Add your audio file to the project root as **music.mp3** (or **music.m4a**). The site will try to autoplay when the page loads; if the browser blocks it, the first tap or click anywhere will start the music. The floating button toggles play/pause.
 
 ## Customize
 

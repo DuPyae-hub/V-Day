@@ -166,13 +166,13 @@ section {
   letter-spacing: 0.05em;
 }
 
-/* Heart-shaped frame */
+/* Heart-shaped frame – large couple photo */
 .heart-frame {
-  --heart-size: min(320px, 85vw);
+  --heart-size: min(520px, 94vw);
   width: var(--heart-size);
   height: var(--heart-size);
   margin: 0 auto;
-  filter: drop-shadow(0 12px 32px var(--shadow)) drop-shadow(0 0 0 1px rgba(255,255,255,0.6));
+  filter: drop-shadow(0 16px 40px var(--shadow)) drop-shadow(0 0 0 2px rgba(255,255,255,0.7));
   animation: heartFloat 4s ease-in-out infinite;
 }
 
@@ -675,17 +675,6 @@ body.no-custom-cursor .music-toggle,
   left: -9999px;
 }
 
-.youtube-player-wrap {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
 
 /* ===== Scroll-triggered animations ===== */
 .reveal {
