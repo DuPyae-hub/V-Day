@@ -177,40 +177,60 @@
     if (e.key === 'Escape' && letterModal && letterModal.getAttribute('data-open') === 'true') closeLetter();
   });
 
-  // ----- Music: your audio file, autoplay when possible -----
+  // ----- Music: play only from direct user tap/click (required on iOS) -----
   const musicToggle = document.getElementById('music-toggle');
   const bgMusic = document.getElementById('bg-music');
-  var autoplayTried = false;
 
-  function tryAutoplay() {
-    if (!bgMusic || autoplayTried) return;
-    autoplayTried = true;
-    var p = bgMusic.play();
-    if (p && typeof p.then === 'function') {
-      p.then(function () {
+  function runPlay() {
+    if (!bgMusic) return;
+    bgMusic.volume = 1;
+    var promise = bgMusic.play();
+    if (promise && promise.then) {
+      promise.then(function () {
         if (musicToggle) musicToggle.classList.add('playing');
+        var h = document.getElementById('music-hint');
+        if (h) h.textContent = '';
       }).catch(function () {});
+    } else if (musicToggle) {
+      musicToggle.classList.add('playing');
     }
   }
 
-  function toggleMusic() {
+  function runPause() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    if (musicToggle) musicToggle.classList.remove('playing');
+  }
+
+  function handleMusicTap(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (!bgMusic) return;
     if (bgMusic.paused) {
-      bgMusic.play().catch(function () {});
-      if (musicToggle) musicToggle.classList.add('playing');
+      runPlay();
     } else {
-      bgMusic.pause();
-      if (musicToggle) musicToggle.classList.remove('playing');
+      runPause();
     }
   }
 
-  if (bgMusic) {
-    tryAutoplay();
-    document.addEventListener('click', tryAutoplay, { once: true });
-    document.addEventListener('touchstart', tryAutoplay, { once: true });
-    document.addEventListener('keydown', tryAutoplay, { once: true });
+  if (musicToggle) {
+    musicToggle.addEventListener('click', handleMusicTap);
+    musicToggle.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      handleMusicTap(e);
+    }, { passive: false });
   }
-  if (musicToggle) musicToggle.addEventListener('click', toggleMusic);
+
+  var didUnlock = false;
+  function unlockOnce() {
+    if (didUnlock || !bgMusic) return;
+    didUnlock = true;
+    runPlay();
+  }
+  document.addEventListener('click', unlockOnce, { once: true });
+  document.addEventListener('touchend', unlockOnce, { once: true, passive: true });
 
   // ----- Scroll reveal -----
   const revealEls = document.querySelectorAll('.section-title, .day-counter, .gallery, .split-layout, .btn-heart, .birthday-countdown');

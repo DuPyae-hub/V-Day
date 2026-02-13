@@ -628,10 +628,24 @@ body.no-custom-cursor .btn-heart,
 }
 
 /* ===== Music toggle ===== */
-.music-toggle {
+.music-wrap {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 100;
+}
+
+.music-hint {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.music-toggle {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -642,13 +656,19 @@ body.no-custom-cursor .btn-heart,
   justify-content: center;
   box-shadow: 0 6px 20px var(--shadow-gold);
   cursor: none;
-  z-index: 100;
   transition: transform var(--transition), box-shadow var(--transition);
+  border: none;
+  padding: 0;
 }
 
 body.no-custom-cursor .music-toggle,
 @media (max-width: 768px) {
   .music-toggle { cursor: pointer; }
+  .music-hint { display: block; }
+}
+
+@media (min-width: 769px) {
+  .music-hint { display: none; }
 }
 
 .music-toggle:hover {
@@ -869,9 +889,11 @@ body.no-custom-cursor .music-toggle,
     font-size: 0.8rem;
   }
 
-  .music-toggle {
+  .music-wrap {
     bottom: max(1rem, env(safe-area-inset-bottom));
     right: max(1rem, env(safe-area-inset-right));
+  }
+  .music-toggle {
     width: 52px;
     height: 52px;
   }

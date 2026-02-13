@@ -15,7 +15,9 @@ Then visit **http://localhost:8080**.
 
 ## Music
 
-Add your audio file to the project root as **music.mp3** (or **music.m4a**). To use the song from [this YouTube link](https://youtu.be/OSH8xhp19VU), download or convert it to MP3 with a tool of your choice and save as `music.mp3` in this folder. The site will try to autoplay when the page loads; if the browser blocks it, the first tap or click anywhere will start the music. The floating button toggles play/pause.
+1. Add your audio file in the **project root** (same folder as `index.html`) as **music.mp3** or **music.m4a**.
+2. On Mac and mobile, browsers block autoplay: **tap the music button** (bottom right) or **tap anywhere once** to start playback.
+3. If you use GitHub Pages, add `music.mp3` to the repo and push so the file is served from the same origin.
 
 ## Customize
 
