@@ -67,7 +67,7 @@
   `;
   document.head.appendChild(fallStyle);
 
-  // ----- Day counter (since 30 Dec 2025) -----
+  // ----- Day counter (since 30 Dec 2025 11:25 PM) – includes seconds -----
   function updateLoveCounter() {
     const now = new Date();
     const diff = now - LOVE_DATE;
@@ -75,15 +75,18 @@
     const days = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
     const elDays = document.getElementById('days');
     const elHours = document.getElementById('hours');
     const elMinutes = document.getElementById('minutes');
+    const elSeconds = document.getElementById('seconds');
     if (elDays) elDays.textContent = days;
     if (elHours) elHours.textContent = hours;
     if (elMinutes) elMinutes.textContent = minutes;
+    if (elSeconds) elSeconds.textContent = seconds;
   }
   updateLoveCounter();
-  setInterval(updateLoveCounter, 60000);
+  setInterval(updateLoveCounter, 1000);
 
   // ----- Birthday countdown (17 Feb 2026) -----
   function updateBirthdayCountdown() {
@@ -429,4 +432,21 @@
     el.classList.add('reveal');
     observer.observe(el);
   });
+
+  // ----- Image box opening effect: trigger when section in view -----
+  var imageBoxGrid = document.getElementById('image-box-grid');
+  if (imageBoxGrid) {
+    var boxObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            imageBoxGrid.classList.remove('image-box--closed');
+            imageBoxGrid.classList.add('image-box--open');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    boxObserver.observe(imageBoxGrid);
+  }
 })();
