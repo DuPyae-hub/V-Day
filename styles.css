@@ -688,7 +688,7 @@ body.no-custom-cursor .music-toggle,
   transform: translateY(0);
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive / Mobile layout ===== */
 @media (max-width: 900px) {
   .split-layout {
     grid-template-columns: 1fr;
@@ -705,32 +705,205 @@ body.no-custom-cursor .music-toggle,
   }
 }
 
-@media (max-width: 700px) {
-  .gallery.grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 320px;
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
   }
 
   section {
-    padding: 3rem 0;
+    padding: 2.5rem 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1.25rem 1rem 2.5rem;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.2rem;
+  }
+
+  .hero-date {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .heart-frame {
+    --heart-size: min(380px, 88vw);
+    margin-bottom: 0.5rem;
+  }
+
+  .scroll-hint {
+    bottom: 1.25rem;
+    font-size: 0.75rem;
+  }
+
+  .counter-section .container {
+    padding: 0 1rem;
+  }
+
+  .day-counter {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+    line-height: 1.4;
+  }
+
+  .gallery-section .section-subtitle {
+    margin-bottom: 1.5rem;
+  }
+
+  .gallery.grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    padding: 0 0.25rem;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    border-width: 3px;
+    min-height: 0;
+  }
+
+  .why-section {
+    padding: 2.5rem 0;
+  }
+
+  .split-layout {
+    gap: 1.75rem;
+  }
+
+  .why-photo-wrap {
+    border-width: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .why-photo {
+    max-height: 280px;
+  }
+
+  .why-list li {
+    padding-left: 1.75rem;
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+  }
+
+  .letter-section {
+    padding: 2rem 0;
+  }
+
+  .btn-heart {
+    font-size: 1.05rem;
+    padding: 0.9rem 1.6rem;
+    min-height: 48px;
+  }
+
+  .modal {
+    padding: 1rem;
+    align-items: flex-end;
+  }
+
+  .modal-box {
+    max-height: 90vh;
+    max-height: 90dvh;
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding-right: 2.5rem;
+  }
+
+  .modal-body {
+    font-size: 0.95rem;
+  }
+
+  .letter-burmese {
+    font-size: 1rem;
+  }
+
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.75rem;
+  }
+
+  .footer {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .countdown-title {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .birthday-countdown {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .countdown-block {
+    min-width: 64px;
+    padding: 0.6rem 0.5rem;
+  }
+
+  .countdown-block span {
+    font-size: 1.35rem;
+  }
+
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+
+  .music-toggle {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    right: max(1rem, env(safe-area-inset-right));
+    width: 52px;
+    height: 52px;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 1.5rem 1rem 3rem;
+    padding: 1rem 0.75rem 2rem;
   }
 
-  .birthday-countdown {
+  .hero-title {
+    font-size: 1.65rem;
+  }
+
+  .heart-frame {
+    --heart-size: min(320px, 90vw);
+  }
+
+  .gallery.grid-3 {
     gap: 0.75rem;
   }
 
+  .birthday-countdown {
+    gap: 0.5rem;
+  }
+
   .countdown-block {
-    min-width: 60px;
-    padding: 0.5rem 0.75rem;
+    min-width: 56px;
+    padding: 0.5rem 0.4rem;
   }
 
   .countdown-block span {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 }

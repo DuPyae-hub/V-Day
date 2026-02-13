@@ -15,7 +15,7 @@ Then visit **http://localhost:8080**.
 
 ## Music
 
-Add your audio file to the project root as **music.mp3** (or **music.m4a**). The site will try to autoplay when the page loads; if the browser blocks it, the first tap or click anywhere will start the music. The floating button toggles play/pause.
+Add your audio file to the project root as **music.mp3** (or **music.m4a**). To use the song from [this YouTube link](https://youtu.be/OSH8xhp19VU), download or convert it to MP3 with a tool of your choice and save as `music.mp3` in this folder. The site will try to autoplay when the page loads; if the browser blocks it, the first tap or click anywhere will start the music. The floating button toggles play/pause.
 
 ## Customize
 
