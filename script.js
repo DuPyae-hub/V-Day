@@ -156,8 +156,31 @@
   const letterBackdrop = letterModal && letterModal.querySelector('.modal-backdrop');
   const letterClose = letterModal && letterModal.querySelector('.modal-close');
 
+  function heartBurst(container, count) {
+    if (!container) return;
+    var hearts = ['♥', '❤', '💕'];
+    for (var i = 0; i < count; i++) {
+      var el = document.createElement('span');
+      el.className = 'burst-heart';
+      el.textContent = hearts[i % 3];
+      var angle = (i / count) * Math.PI * 2 + Math.random();
+      var dist = 80 + Math.random() * 60;
+      el.style.setProperty('--bx', Math.cos(angle) * dist + 'px');
+      el.style.setProperty('--by', Math.sin(angle) * dist - 40 + 'px');
+      container.appendChild(el);
+      setTimeout(function (node) {
+        if (node.parentNode) node.parentNode.removeChild(node);
+      }, 1000, el);
+    }
+  }
+
   function openLetter() {
     if (!letterModal) return;
+    var burst = document.getElementById('letter-burst');
+    if (burst) {
+      burst.innerHTML = '';
+      heartBurst(burst, 12);
+    }
     letterModal.removeAttribute('hidden');
     letterModal.setAttribute('data-open', 'true');
     document.body.style.overflow = 'hidden';
@@ -176,6 +199,44 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && letterModal && letterModal.getAttribute('data-open') === 'true') closeLetter();
   });
+
+  // ----- Tap hearts (hero / heart frame) -----
+  var tapHeartsEl = document.getElementById('tap-hearts');
+  var heroHeart = document.getElementById('hero-heart');
+  function spawnTapHearts(x, y) {
+    if (!tapHeartsEl) return;
+    var hearts = ['♥', '❤', '💕'];
+    for (var i = 0; i < 5; i++) {
+      var el = document.createElement('span');
+      el.className = 'tap-heart';
+      el.textContent = hearts[i % 3];
+      el.style.left = (x + (Math.random() - 0.5) * 40) + 'px';
+      el.style.top = y + 'px';
+      tapHeartsEl.appendChild(el);
+      setTimeout(function (node) {
+        if (node.parentNode) node.parentNode.removeChild(node);
+      }, 1200, el);
+    }
+  }
+  function onHeroTap(e) {
+    var x = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    var y = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+    spawnTapHearts(x, y);
+  }
+  if (heroHeart) {
+    heroHeart.addEventListener('click', onHeroTap);
+    heroHeart.addEventListener('touchend', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        spawnTapHearts(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+      }
+    });
+  }
+
+  // ----- Corner "Made with love" -----
+  setTimeout(function () {
+    var corner = document.getElementById('corner-love');
+    if (corner) corner.classList.add('visible');
+  }, 3000);
 
   // ----- Music: YouTube song (https://youtu.be/OSH8xhp19VU) – autoplay muted, tap for sound -----
   const musicToggle = document.getElementById('music-toggle');
@@ -216,6 +277,28 @@
     });
   }
 
+  var didCelebrateMusic = false;
+  function musicCelebration() {
+    if (didCelebrateMusic) return;
+    didCelebrateMusic = true;
+    var wrap = document.getElementById('music-celebration-wrap');
+    if (!wrap) return;
+    var symbols = ['♥', '♪', '❤'];
+    for (var i = 0; i < 3; i++) {
+      var el = document.createElement('span');
+      el.className = 'music-celebration';
+      el.textContent = symbols[i];
+      el.style.left = (15 + i * 14) + 'px';
+      el.style.bottom = '0';
+      el.style.position = 'absolute';
+      el.style.animationDelay = (i * 0.1) + 's';
+      wrap.appendChild(el);
+      setTimeout(function (node) {
+        if (node.parentNode) node.parentNode.removeChild(node);
+      }, 800, el);
+    }
+  }
+
   function unmuteMusic() {
     if (!ytPlayer || !ytPlayer.unMute) return;
     ytPlayer.unMute();
@@ -223,6 +306,7 @@
     soundOn = true;
     if (musicToggle) musicToggle.classList.add('playing');
     updateHint();
+    musicCelebration();
   }
 
   function toggleMute() {
