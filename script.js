@@ -209,36 +209,57 @@
 
   function openLetter() {
     if (!letterModal) return;
-    playLetterChime();
-    var burst = document.getElementById('letter-burst');
-    if (burst) {
-      burst.innerHTML = '';
-      heartBurst(burst, 18);
-      setTimeout(function () {
-        heartBurst(burst, 10);
-      }, 150);
-    }
-    var glow = document.getElementById('letter-glow');
-    if (glow) glow.style.animation = 'none';
     var box = document.getElementById('letter-modal-box');
-    if (box) {
-      box.classList.remove('letter-open');
-      void box.offsetWidth;
-      box.classList.add('letter-open');
-    }
+    var plane = document.getElementById('paper-plane');
+    var burst = document.getElementById('letter-burst');
+    var glow = document.getElementById('letter-glow');
+
     letterModal.removeAttribute('hidden');
     letterModal.setAttribute('data-open', 'true');
     document.body.style.overflow = 'hidden';
+
+    if (box) {
+      box.classList.remove('letter--open', 'letter-open');
+      box.classList.add('letter--closed');
+    }
+    if (plane) {
+      plane.classList.remove('fly');
+      plane.offsetWidth;
+      plane.classList.add('fly');
+    }
     if (glow) {
+      glow.style.animation = 'none';
       glow.offsetHeight;
       glow.style.animation = '';
     }
+
+    setTimeout(function () {
+      if (plane) plane.classList.remove('fly');
+      if (box) {
+        box.classList.remove('letter--closed');
+        box.classList.add('letter--open');
+        box.offsetWidth;
+        box.classList.add('letter-open');
+      }
+      playLetterChime();
+      if (burst) {
+        burst.innerHTML = '';
+        heartBurst(burst, 18);
+        setTimeout(function () {
+          heartBurst(burst, 10);
+        }, 150);
+      }
+    }, 1250);
   }
 
   function closeLetter() {
     if (!letterModal) return;
     var box = document.getElementById('letter-modal-box');
-    if (box) box.classList.remove('letter-open');
+    var plane = document.getElementById('paper-plane');
+    if (box) {
+      box.classList.remove('letter-open', 'letter--open', 'letter--closed');
+    }
+    if (plane) plane.classList.remove('fly');
     letterModal.setAttribute('data-open', 'false');
     letterModal.setAttribute('hidden', '');
     document.body.style.overflow = '';
